@@ -1,4 +1,3 @@
-import "@codingame/monaco-vscode-language-pack-zh-hans";
 import "@codingame/monaco-vscode-python-default-extension";
 import "@codingame/monaco-vscode-theme-defaults-default-extension";
 
