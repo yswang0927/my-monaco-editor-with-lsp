@@ -1,3 +1,8 @@
+/**
+ * 这是一个最简单的支持 python-lsp 的编辑器
+ */
+
+import "@codingame/monaco-vscode-language-pack-zh-hans";
 import "@codingame/monaco-vscode-python-default-extension";
 import "@codingame/monaco-vscode-theme-defaults-default-extension";
 
@@ -8,15 +13,14 @@ import { initialize } from '@codingame/monaco-vscode-api';
 
 // we need to import this so monaco-languageclient can use vscode-api
 import "vscode/localExtensionHost";
-import { initWebSocketAndStartClient } from "./lsp-client";
 
 // everything else is the same except the last line
 import getLanguagesServiceOverride from "@codingame/monaco-vscode-languages-service-override";
 import getThemeServiceOverride from "@codingame/monaco-vscode-theme-service-override";
 import getTextMateServiceOverride from "@codingame/monaco-vscode-textmate-service-override";
-
 import getConfigurationServiceOverride, { initUserConfiguration } from "@codingame/monaco-vscode-configuration-service-override";
 
+import { initWebSocketAndStartClient } from "./lsp-client";
 
 export type WorkerLoader = () => Worker;
 const workerLoaders: Partial<Record<string, WorkerLoader>> = {
@@ -56,15 +60,18 @@ const main = async () => {
     ...getConfigurationServiceOverride(),
     ...getTextMateServiceOverride(),
     ...getThemeServiceOverride(),
-    ...getLanguagesServiceOverride()
+    ...getLanguagesServiceOverride(),
   });
 
   monaco.editor.create(document.getElementById("editor")!, {
     value: "import numpy as np\nprint('Hello world!')",
-    language: "python"
+    language: "python",
+    wordBasedSuggestions: 'currentDocument',
+    wordBasedSuggestionsOnlySameLanguage: true
   });
 
-  initWebSocketAndStartClient("ws://localhost:5007");
+  // 使用 pylsp 启动的python-lsp websocket服务
+  initWebSocketAndStartClient("ws://localhost:5007", "python");
 };
 
 main();

@@ -3,7 +3,7 @@ import { CloseAction, ErrorAction, MessageTransports } from 'vscode-languageclie
 import { WebSocketMessageReader, WebSocketMessageWriter, toSocket } from 'vscode-ws-jsonrpc';
 import { MonacoLanguageClient } from 'monaco-languageclient';
 
-export const initWebSocketAndStartClient = (url: string): WebSocket => {
+export const initWebSocketAndStartClient = (url: string, languageId: string): WebSocket => {
     const webSocket = new WebSocket(url);
     webSocket.onopen = () => {
 	    // creating messageTransport
@@ -14,19 +14,19 @@ export const initWebSocketAndStartClient = (url: string): WebSocket => {
         const languageClient = createLanguageClient({
             reader,
             writer
-        });
+        }, languageId);
         languageClient.start();
         reader.onClose(() => languageClient.stop());
     };
     return webSocket;
 };
 
-const createLanguageClient = (messageTransports: MessageTransports): MonacoLanguageClient => {
+const createLanguageClient = (messageTransports: MessageTransports, languageId: string): MonacoLanguageClient => {
     return new MonacoLanguageClient({
         name: 'Sample Language Client',
         clientOptions: {
             // use a language id as a document selector
-            documentSelector: ['python'],
+            documentSelector: [languageId],
             // disable the default error handler
             errorHandler: {
                 error: () => ({ action: ErrorAction.Continue }),
