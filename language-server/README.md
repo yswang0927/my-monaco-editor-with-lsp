@@ -9,10 +9,10 @@
 npm i 
 
 # 启动 java-lsp 服务
-npm run start:server:java
+node bin/java-lsp.js
 
 # 启动 groovy-lsp 服务
-npm run start:server:groovy
+node bin/groovy-lsp.js
 
 
 ```
