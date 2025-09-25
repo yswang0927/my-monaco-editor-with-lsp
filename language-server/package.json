@@ -1,0 +1,14 @@
+{
+  "name": "language-server-node",
+  "version": "1.0.0",
+  "scripts": {
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "vscode-languageserver-protocol": "^3.17.5",
+    "vscode-ws-jsonrpc": "^3.5.0",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+  }
+}
