@@ -7,7 +7,7 @@ const eclipseJdtLsConfig = {
     languageId: 'java',
     port: 30003,
     path: '/java',
-    basePath: path.join(__dirname, 'providers', 'java')
+    basePath: path.join(path.dirname(__dirname), 'providers', 'java')
 };
 
 const runEclipseJdtLs = () => {

@@ -6,7 +6,7 @@ const groovyLspConfig = {
     languageId: 'groovy',
     port: 30002,
     path: '/groovy',
-    basePath: path.join(__dirname, 'providers', 'groovy')
+    basePath: path.join(path.dirname(__dirname), 'providers', 'groovy')
 };
 
 const runGroovyLanguageServer = () => {

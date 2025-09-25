@@ -104,20 +104,22 @@ const main = async (lsConfig: LspConfig, helloCode: string) => {
     await vscode.workspace.openTextDocument(helloUri);
 };
 
-/*
+
 main({
     ip: '127.0.0.1',
     port: 30003,
     path: '/java',
     languageId: 'java',
-    basePath: '/home/xk/文档/my-monaco-editor-with-lsp/language-server/java'
+    basePath: '/home/xk/文档/my-monaco-editor-with-lsp/language-server/providers/java'
 }, "");
-*/
 
+
+/*
 main({
     ip: '127.0.0.1',
     port: 30002,
     path: '/groovy',
     languageId: 'groovy',
-    basePath: '/home/xk/文档/my-monaco-editor-with-lsp/language-server/groovy'
+    basePath: '/home/xk/文档/my-monaco-editor-with-lsp/language-server/providers/groovy'
 }, "");
+*/
