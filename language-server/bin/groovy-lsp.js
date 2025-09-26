@@ -31,7 +31,7 @@ const runGroovyLanguageServer = () => {
     }
 
     runLanguageServer({
-        serverName: 'GROOVY',
+        serverName: 'Groovy',
         pathName: groovyLspConfig.path,
         serverPort: groovyLspConfig.port,
         runCommand: javaCmd,

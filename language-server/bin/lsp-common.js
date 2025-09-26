@@ -125,6 +125,8 @@ const runLanguageServer = (languageServerRunConfig) => {
         server: httpServer,
         wss: wss
     });
+
+    console.log(`${languageServerRunConfig.serverName} language-server running at 'ws://localhost:${languageServerRunConfig.serverPort}${languageServerRunConfig.pathName}'`);
 };
 
 module.exports = { runLanguageServer };
