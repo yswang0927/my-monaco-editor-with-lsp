@@ -39,3 +39,5 @@ public class GroovyLanguageServer {
 ./gradlew build
 
 ```
+
+如果需要加载额外的第三方 .jar 包, 则需要把这些 jar 文件放到 `libs/` 目录下即可.

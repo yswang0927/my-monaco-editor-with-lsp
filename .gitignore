@@ -1,3 +1,11 @@
+# Dependency directories
+language-server/providers/java/jre/
+language-server/providers/java/jdtls/
+language-server/providers/java/workspace/
+language-server/providers/groovy/libs/
+node_modules/
+jspm_packages/
+
 # Logs
 logs
 *.log
@@ -36,13 +44,6 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
-
-# Dependency directories
-language-server/providers/java/jdtls/
-language-server/providers/java/workspace/.metadata/
-language-server/providers/groovy/libs/
-node_modules/
-jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
