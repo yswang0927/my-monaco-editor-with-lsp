@@ -16,15 +16,13 @@ import { MonacoVscodeApiWrapper, type MonacoVscodeApiConfig } from 'monaco-langu
 
 
 export type LspConfig = {
-    ip: string;
-    port: number;
-    path: string;
+    websocketUrl: string;
     languageId: string;
     basePath: string;
 };
 
 const main = async (lsConfig: LspConfig, helloCode: string) => {
-    const helloUri = vscode.Uri.file(`${lsConfig.basePath}/workspace/hello.${lsConfig.languageId}`);
+    const helloUri = vscode.Uri.file(`${lsConfig.basePath}/src/hello.${lsConfig.languageId}`);
     const fileSystemProvider = new RegisteredFileSystemProvider(false);
     fileSystemProvider.registerFile(new RegisteredMemoryFile(helloUri, helloCode));
     registerFileSystemOverlay(1, fileSystemProvider);
@@ -57,7 +55,7 @@ const main = async (lsConfig: LspConfig, helloCode: string) => {
         connection: {
             options: {
                 $type: 'WebSocketUrl',
-                url: `ws://${lsConfig.ip}:${lsConfig.port}${lsConfig.path}`,
+                url: lsConfig.websocketUrl,
                 startOptions: {
                     onCall: () => {
                         console.log('Connected to socket.');
@@ -77,7 +75,7 @@ const main = async (lsConfig: LspConfig, helloCode: string) => {
             workspaceFolder: {
                 index: 0,
                 name: 'workspace',
-                uri: vscode.Uri.parse(`${lsConfig.basePath}/workspace`)
+                uri: vscode.Uri.parse(`${lsConfig.basePath}`)
             }
         }
     };
@@ -106,11 +104,9 @@ const main = async (lsConfig: LspConfig, helloCode: string) => {
 
 
 main({
-    ip: '127.0.0.1',
-    port: 30003,
-    path: '/java',
+    websocketUrl: 'ws://127.0.0.1:30003/java',
     languageId: 'java',
-    basePath: '/home/xk/文档/my-monaco-editor-with-lsp/language-server/providers/java'
+    basePath: '/home/xk/文档/my-monaco-editor-with-lsp/language-server/providers/java/workspace/boss'
 }, "");
 
 
@@ -120,6 +116,6 @@ main({
     port: 30002,
     path: '/groovy',
     languageId: 'groovy',
-    basePath: '/home/xk/文档/my-monaco-editor-with-lsp/language-server/providers/groovy'
+    basePath: '/home/xk/文档/my-monaco-editor-with-lsp/test'
 }, "");
 */

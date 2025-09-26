@@ -3,8 +3,10 @@ language-server/providers/java/jre/
 language-server/providers/java/jdtls/
 language-server/providers/java/workspace/
 language-server/providers/groovy/libs/
+language-server/package-lock.json
 node_modules/
 jspm_packages/
+test/
 
 # Logs
 logs

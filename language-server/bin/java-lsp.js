@@ -52,7 +52,7 @@ const runEclipseJdtLs = () => {
             '-DDetectVMInstallationsJob.disabled=true',
             '-Dfile.encoding=utf8',
             '-Dsun.zip.disableMemoryMapping=true',
-            '-Dlog.level=ALL',
+            '-Dlog.level=ERROR',
             '-XX:+UseParallelGC',
             '-XX:GCTimeRatio=4',
             '-XX:AdaptiveSizePolicyWeight=90',
