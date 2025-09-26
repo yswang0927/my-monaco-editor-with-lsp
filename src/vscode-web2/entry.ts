@@ -1,8 +1,19 @@
 (async () => {
+  // 根据 URL 参数或 localStorage 设置语言环境
   const searchParams = new URLSearchParams(window.location.search);
+
   let locale = searchParams.get('locale');
   if (locale == null) {
     locale = window.localStorage.getItem('vscode-locale');
+  }
+  
+  if (locale == null) {
+    locale = navigator.language.toLowerCase();
+    if (locale === 'zh' || locale.startsWith('zh-')) {
+      locale = 'zh-hans';
+    } else {
+      locale = 'en';
+    }
   }
 
   const localeLoader: Partial<Record<string, () => Promise<void>>> = {

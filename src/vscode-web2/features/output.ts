@@ -17,11 +17,11 @@ if (!useHtmlFileSystemProvider) {
 
   void getApi().then(async (vscode) => {
     const fakeOutputChannel = vscode.window.createOutputChannel('自定义output窗口')
-    //const anotherFakeOutputChannel = vscode.window.createOutputChannel('Your code', 'javascript')
+    const anotherFakeOutputChannel = vscode.window.createOutputChannel('Your code', 'javascript')
 
     fakeOutputChannel.append("Here's some fake output\n")
 
-    /*const mainDocument = await vscode.workspace.openTextDocument(
+    const mainDocument = await vscode.workspace.openTextDocument(
       vscode.Uri.file('/workspace/test.js')
     )
     anotherFakeOutputChannel.replace(mainDocument.getText())
@@ -29,7 +29,7 @@ if (!useHtmlFileSystemProvider) {
       if (e.document === mainDocument && e.contentChanges.length > 0) {
         anotherFakeOutputChannel.replace(e.document.getText())
       }
-    })*/
+    })
 
   });
 

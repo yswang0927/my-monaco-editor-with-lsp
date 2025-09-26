@@ -3,9 +3,7 @@ import { Worker } from './fakeWorker'
 
 const fakeWorker = new Worker(
   new URL('@codingame/monaco-vscode-api/workers/extensionHost.worker', import.meta.url),
-  {
-    type: 'module'
-  }
+  { type: 'module' }
 )
 
 export const workerConfig: WorkerConfig = {

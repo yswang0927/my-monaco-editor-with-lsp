@@ -1,5 +1,4 @@
 import getConfigurationServiceOverride, {
-  IStoredWorkspace,
   initUserConfiguration
 } from '@codingame/monaco-vscode-configuration-service-override'
 import getKeybindingsServiceOverride, {
@@ -77,18 +76,22 @@ import getUpdateServiceOverride from '@codingame/monaco-vscode-update-service-ov
 import getExplorerServiceOverride from '@codingame/monaco-vscode-explorer-service-override'
 import getLocalizationServiceOverride from '@codingame/monaco-vscode-localization-service-override'
 import getTreeSitterServiceOverride from '@codingame/monaco-vscode-treesitter-service-override'
-import getTelemetryServiceOverride from '@codingame/monaco-vscode-telemetry-service-override'
+//import getTelemetryServiceOverride from '@codingame/monaco-vscode-telemetry-service-override'
 import getMcpServiceOverride from '@codingame/monaco-vscode-mcp-service-override'
 import getProcessControllerServiceOverride from '@codingame/monaco-vscode-process-explorer-service-override'
 import getImageResizeServiceOverride from '@codingame/monaco-vscode-image-resize-service-override'
 import getAssignmentServiceOverride from '@codingame/monaco-vscode-assignment-service-override'
 import { EnvironmentOverride } from '@codingame/monaco-vscode-api/workbench'
-import { Worker } from './tools/crossOriginWorker'
+
+import 'vscode/localExtensionHost'
+
 import defaultKeybindings from './user/keybindings.json?raw'
 import defaultConfiguration from './user/configuration.json?raw'
-import { TerminalBackend } from './features/terminal'
+
+import { Worker } from './tools/crossOriginWorker'
 import { workerConfig } from './tools/extHostWorker'
-import 'vscode/localExtensionHost'
+import { TerminalBackend } from './features/terminal'
+
 
 const url = new URL(document.location.href)
 const params = url.searchParams
@@ -108,18 +111,10 @@ export const userDataProvider = await createIndexedDBProviders()
 
 if (useHtmlFileSystemProvider) {
   workspaceFile = monaco.Uri.from({ scheme: 'tmp', path: '/test.code-workspace' })
-  await initFile(
-    workspaceFile,
-    JSON.stringify(
-      {
-        folders: []
-      },
-      null,
-      2
-    )
-  )
+  await initFile(workspaceFile, JSON.stringify({ folders: [] }, null, 2))
 
   registerHTMLFileSystemProvider()
+
 } else {
   const fileSystemProvider = new RegisteredFileSystemProvider(false)
 
@@ -148,21 +143,6 @@ while (variable < 5000) {
     )
   )
 
-  fileSystemProvider.registerFile(
-    new RegisteredMemoryFile(
-      vscode.Uri.file('/workspace/jsconfig.json'),
-      `{
-  "compilerOptions": {
-    "target": "es2020",
-    "module": "esnext",
-    "lib": [
-      "es2021",
-      "DOM"
-    ]
-  }
-}`
-    )
-  )
 
   fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
@@ -188,45 +168,18 @@ while (variable < 5000) {
     )
   )
 
-  fileSystemProvider.registerFile(
-    new RegisteredMemoryFile(
-      vscode.Uri.file('/workspace/test.md'),
-      `
-***Hello World***
-
-Math block:
-$$
-\\displaystyle
-\\left( \\sum_{k=1}^n a_k b_k \\right)^2
-\\leq
-\\left( \\sum_{k=1}^n a_k^2 \\right)
-\\left( \\sum_{k=1}^n b_k^2 \\right)
-$$
-
-# Easy Math
-
-2 + 2 = 4 // this test will pass
-2 + 2 = 5 // this test will fail
-
-# Harder Math
-
-230230 + 5819123 = 6049353
-`
-    )
-  )
 
   fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
       vscode.Uri.file('/workspace/test.customeditor'),
-      `
-Custom Editor!`
+      'Custom Editor!'
     )
   )
 
   fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
-      vscode.Uri.file('/workspace/test.css'),
-      `
+      vscode.Uri.file('/workspace/css/test.css'),
+`
 h1 {
   color: DeepSkyBlue;
 }`
@@ -238,7 +191,7 @@ h1 {
     new RegisteredMemoryFile(
       workspaceFile,
       JSON.stringify(
-        <IStoredWorkspace>{
+        {
           folders: [
             {
               path: '/workspace'
@@ -251,24 +204,13 @@ h1 {
     )
   )
 
-  fileSystemProvider.registerFile(
-    new RegisteredMemoryFile(
-      monaco.Uri.file('/workspace/.vscode/extensions.json'),
-      JSON.stringify(
-        {
-          recommendations: ['vscodevim.vim']
-        },
-        null,
-        2
-      )
-    )
-  )
 
   registerFileSystemOverlay(1, fileSystemProvider)
 }
 
 // Workers
-export type WorkerLoader = () => Worker
+export type WorkerLoader = () => Worker;
+
 const workerLoaders: Partial<Record<string, WorkerLoader>> = {
   TextEditorWorker: () =>
     new Worker(new URL('monaco-editor/esm/vs/editor/editor.worker.js', import.meta.url), {
@@ -352,7 +294,7 @@ export const constructOptions: IWorkbenchConstructionOptions = {
     logLevel: LogLevel.Info // Default value
   },
   configurationDefaults: {
-    'window.title': 'Monaco-Vscode-Api${separator}${dirty}${activeEditorShort}'
+    'window.title': 'MyCodeEditor${separator}${dirty}${activeEditorShort}'
   },
   defaultLayout: {
     editors: useHtmlFileSystemProvider
@@ -542,7 +484,7 @@ export const commonServices: IEditorOverrideServices = {
     ]
   }),
   ...getSecretStorageServiceOverride(),
-  ...getTelemetryServiceOverride(),
+  //...getTelemetryServiceOverride(), // 遥测. vscode 会收集遥测数据，用于帮助改进产品
   ...getMcpServiceOverride(),
   ...getProcessControllerServiceOverride(),
   ...getImageResizeServiceOverride(),
