@@ -31,8 +31,8 @@ const runEclipseJdtLs = () => {
     }
 
     const jdtlsPath = path.join(eclipseJdtLsConfig.basePath, 'jdtls');
-    const jdtlsLauncherJar = path.join(`${jdtlsPath}`, 'plugins', 'org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar');
-    const jdtlsConfig = path.join(`${jdtlsPath}`, `config_${platformConfig}`);
+    const jdtlsLauncherJar = path.join(jdtlsPath, 'plugins', 'org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar');
+    const jdtlsConfig = path.join(jdtlsPath, `config_${platformConfig}`);
 
     const eclipseWorkspacePath = path.join(eclipseJdtLsConfig.basePath, 'workspace');
     if (!fs.existsSync(eclipseWorkspacePath)) {

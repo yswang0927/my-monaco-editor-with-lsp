@@ -38,7 +38,7 @@ const runGroovyLanguageServer = () => {
         runCommandArgs: [
             path.join(`-Dadditional.classpath=${additionalClasspath}`, '*'),
             '-jar',
-            path.join(`${groovyLspConfig.basePath}`, 'groovy-language-server-all.jar')
+            path.join(groovyLspConfig.basePath, 'groovy-language-server-all.jar')
         ],
         wsServerOptions: {
             noServer: true,
