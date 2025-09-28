@@ -32,10 +32,20 @@ if (container == null || container === undefined) {
       mode: 'open'
     })
 
-    const workbenchElement = document.createElement('div')
-    workbenchElement.style.height = '100vh'
-    shadowRoot.appendChild(workbenchElement)
-    container = workbenchElement
+    const workbenchElement = document.createElement('div');
+    workbenchElement.style.height = '100vh';
+    const style = document.createElement('style');
+    style.textContent = `
+    .monaco-workbench .pane-composite-part > .header-or-footer .composite-bar-container {
+      justify-content: center;
+    }
+    .monaco-workbench .pane-composite-part > .header-or-footer .composite-bar-container .actions-container {
+      gap: 6px;
+    }
+    `;
+    shadowRoot.appendChild(style);
+    shadowRoot.appendChild(workbenchElement);
+    container = workbenchElement;
   }
 }
 
@@ -65,8 +75,8 @@ export async function clearStorage(): Promise<void> {
 
 await registerExtension(
   {
-    name: 'demo',
-    publisher: 'codingame',
+    name: 'mycoder',
+    publisher: 'MyCoder',
     version: '1.0.0',
     engines: {
       vscode: '*'

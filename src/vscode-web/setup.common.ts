@@ -71,7 +71,7 @@ import getPerformanceServiceOverride from '@codingame/monaco-vscode-performance-
 import getRelauncherServiceOverride from '@codingame/monaco-vscode-relauncher-service-override'
 import getShareServiceOverride from '@codingame/monaco-vscode-share-service-override'
 // import getSpeechServiceOverride from '@codingame/monaco-vscode-speech-service-override'
-import getSurveyServiceOverride from '@codingame/monaco-vscode-survey-service-override'
+// import getSurveyServiceOverride from '@codingame/monaco-vscode-survey-service-override'
 import getUpdateServiceOverride from '@codingame/monaco-vscode-update-service-override'
 import getExplorerServiceOverride from '@codingame/monaco-vscode-explorer-service-override'
 import getLocalizationServiceOverride from '@codingame/monaco-vscode-localization-service-override'
@@ -85,8 +85,8 @@ import { EnvironmentOverride } from '@codingame/monaco-vscode-api/workbench'
 
 import 'vscode/localExtensionHost'
 
-import defaultKeybindings from './user/keybindings.json?raw'
 import defaultConfiguration from './user/configuration.json?raw'
+import defaultKeybindings from './user/keybindings.json?raw'
 
 import { Worker } from './tools/crossOriginWorker'
 import { workerConfig } from './tools/extHostWorker'
@@ -267,7 +267,7 @@ export const constructOptions: IWorkbenchConstructionOptions = {
   enableWorkspaceTrust: true,
   connectionToken,
   windowIndicator: {
-    label: 'MyCode Editor',
+    label: 'MyCoder',
     tooltip: '',
     command: ''
   },
@@ -294,7 +294,7 @@ export const constructOptions: IWorkbenchConstructionOptions = {
     logLevel: LogLevel.Info // Default value
   },
   configurationDefaults: {
-    'window.title': 'MyCodeEditor${separator}${dirty}${activeEditorShort}'
+    'window.title': 'MyCoder${separator}${dirty}${activeEditorShort}'
   },
   defaultLayout: {
     editors: useHtmlFileSystemProvider
@@ -325,11 +325,11 @@ export const constructOptions: IWorkbenchConstructionOptions = {
     force: resetLayout
   },
   welcomeBanner: {
-    message: '欢迎使用 MyCode 编辑器',
+    message: '欢迎使用 MyCoder 编辑器',
   },
   productConfiguration: {
-    nameShort: 'MyCodeEditor',
-    nameLong: 'MyCodeEditor',
+    nameShort: 'MyCoder',
+    nameLong: 'MyCoder',
     reportIssueUrl: '',
     extensionsGallery: {
       mcpUrl: '',
@@ -406,7 +406,7 @@ export const commonServices: IEditorOverrideServices = {
   ...getRelauncherServiceOverride(),
   ...getShareServiceOverride(),
   // ...getSpeechServiceOverride(),
-  ...getSurveyServiceOverride(),
+  // ...getSurveyServiceOverride(),
   ...getUpdateServiceOverride(),
   ...getExplorerServiceOverride(),
   ...getLocalizationServiceOverride({

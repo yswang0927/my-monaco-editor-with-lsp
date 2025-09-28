@@ -1,6 +1,6 @@
 import type * as vscode from 'vscode'
 import '@codingame/monaco-vscode-json-language-features-default-extension'
-import '@codingame/monaco-vscode-typescript-language-features-default-extension'
+// import '@codingame/monaco-vscode-typescript-language-features-default-extension'
 import '@codingame/monaco-vscode-html-language-features-default-extension'
 import '@codingame/monaco-vscode-css-language-features-default-extension'
 import '@codingame/monaco-vscode-markdown-language-features-default-extension'
