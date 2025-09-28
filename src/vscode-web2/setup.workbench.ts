@@ -1,4 +1,9 @@
-import { IStorageService, IWorkbenchLayoutService, getService, initialize as initializeMonacoService } from '@codingame/monaco-vscode-api'
+import { 
+  IStorageService, 
+  IWorkbenchLayoutService, 
+  getService, 
+  initialize as initializeMonacoService 
+} from '@codingame/monaco-vscode-api'
 import getWorkbenchServiceOverride, { Parts } from '@codingame/monaco-vscode-workbench-service-override'
 import getQuickAccessServiceOverride from '@codingame/monaco-vscode-quickaccess-service-override'
 import { BrowserStorageService } from '@codingame/monaco-vscode-storage-service-override'
@@ -14,11 +19,9 @@ import {
   disableShadowDom
 } from './setup.common'
 
-//import './features/customView.workbench'
+let container = (window as any).vscodeContainer
 
-let container = window.vscodeContainer
-
-if (container == null) {
+if (container == null || container === undefined) {
   container = document.createElement('div')
   container.style.height = '100vh'
 

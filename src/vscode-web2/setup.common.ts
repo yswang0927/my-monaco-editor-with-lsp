@@ -65,12 +65,12 @@ import getCommentsServiceOverride from '@codingame/monaco-vscode-comments-servic
 import getEditSessionsServiceOverride from '@codingame/monaco-vscode-edit-sessions-service-override'
 import getEmmetServiceOverride from '@codingame/monaco-vscode-emmet-service-override'
 import getInteractiveServiceOverride from '@codingame/monaco-vscode-interactive-service-override'
-import getIssueServiceOverride from '@codingame/monaco-vscode-issue-service-override'
+// import getIssueServiceOverride from '@codingame/monaco-vscode-issue-service-override'
 import getMultiDiffEditorServiceOverride from '@codingame/monaco-vscode-multi-diff-editor-service-override'
 import getPerformanceServiceOverride from '@codingame/monaco-vscode-performance-service-override'
 import getRelauncherServiceOverride from '@codingame/monaco-vscode-relauncher-service-override'
 import getShareServiceOverride from '@codingame/monaco-vscode-share-service-override'
-import getSpeechServiceOverride from '@codingame/monaco-vscode-speech-service-override'
+// import getSpeechServiceOverride from '@codingame/monaco-vscode-speech-service-override'
 import getSurveyServiceOverride from '@codingame/monaco-vscode-survey-service-override'
 import getUpdateServiceOverride from '@codingame/monaco-vscode-update-service-override'
 import getExplorerServiceOverride from '@codingame/monaco-vscode-explorer-service-override'
@@ -100,7 +100,7 @@ export const connectionToken = params.get('connectionToken') ?? undefined
 export const remotePath = remoteAuthority != null ? (params.get('remotePath') ?? undefined) : undefined
 export const resetLayout = params.has('resetLayout')
 export const useHtmlFileSystemProvider = params.has('htmlFileSystemProvider')
-export const disableShadowDom = true; //params.has('disableShadowDom')
+export const disableShadowDom = params.has('disableShadowDom')
 params.delete('resetLayout')
 
 window.history.replaceState({}, document.title, url.href)
@@ -400,12 +400,12 @@ export const commonServices: IEditorOverrideServices = {
   ...getEditSessionsServiceOverride(),
   ...getEmmetServiceOverride(),
   ...getInteractiveServiceOverride(),
-  ...getIssueServiceOverride(),
+  // ...getIssueServiceOverride(),
   ...getMultiDiffEditorServiceOverride(),
   ...getPerformanceServiceOverride(),
   ...getRelauncherServiceOverride(),
   ...getShareServiceOverride(),
-  ...getSpeechServiceOverride(),
+  // ...getSpeechServiceOverride(),
   ...getSurveyServiceOverride(),
   ...getUpdateServiceOverride(),
   ...getExplorerServiceOverride(),
