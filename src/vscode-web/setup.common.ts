@@ -102,12 +102,11 @@ export const resetLayout = params.has('resetLayout')
 export const useHtmlFileSystemProvider = params.has('htmlFileSystemProvider')
 export const disableShadowDom = params.has('disableShadowDom')
 params.delete('resetLayout')
-
 window.history.replaceState({}, document.title, url.href)
 
-export let workspaceFile = monaco.Uri.file('/home/xk/myvscode-workspace.code-workspace')
-
 export const userDataProvider = await createIndexedDBProviders()
+
+let workspaceFile = monaco.Uri.file('/workspace.code-workspace')
 
 if (useHtmlFileSystemProvider) {
   workspaceFile = monaco.Uri.from({ scheme: 'tmp', path: '/test.code-workspace' })
@@ -120,7 +119,7 @@ if (useHtmlFileSystemProvider) {
 
   fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
-      vscode.Uri.file('/home/xk/myvscode-workspace/test.js'),
+      vscode.Uri.file('/workspace/test.js'),
 `// import anotherfile
 let variable = 1
 function inc () {
@@ -137,7 +136,7 @@ while (variable < 5000) {
   const content = new TextEncoder().encode('This is a readonly static file')
   fileSystemProvider.registerFile(
     new RegisteredReadOnlyFile(
-      vscode.Uri.file('/home/xk/myvscode-workspace/test_readonly.js'),
+      vscode.Uri.file('/workspace/test_readonly.js'),
       async () => content,
       content.length
     )
@@ -146,7 +145,7 @@ while (variable < 5000) {
 
   fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
-      vscode.Uri.file('/home/xk/myvscode-workspace/index.html'),
+      vscode.Uri.file('/workspace/index.html'),
       `
 <!DOCTYPE html>
 <html lang="en">
@@ -171,14 +170,14 @@ while (variable < 5000) {
 
   fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
-      vscode.Uri.file('/home/xk/myvscode-workspace/test.customeditor'),
+      vscode.Uri.file('/workspace/test.customeditor'),
       'Custom Editor!'
     )
   );
 
   fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
-      vscode.Uri.file('/home/xk/myvscode-workspace/css/test.css'),
+      vscode.Uri.file('/workspace/css/test.css'),
 `
 h1 {
   color: DeepSkyBlue;
@@ -188,7 +187,7 @@ h1 {
 
     fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
-      vscode.Uri.file('/home/xk/myvscode-workspace/Hello.java'),
+      vscode.Uri.file('/workspace/Hello.java'),
 `class Hello {
   public static void main(String[] args) {
     System.out.println("Hello, world!");
@@ -205,7 +204,7 @@ h1 {
         {
           folders: [
             {
-              path: '/home/xk/myvscode-workspace'
+              path: '/workspace'
             }
           ]
         },

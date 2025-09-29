@@ -7,7 +7,7 @@ import {
 import getWorkbenchServiceOverride from '@codingame/monaco-vscode-workbench-service-override'
 //import getViewsServiceOverride, { attachPart, Parts } from "@codingame/monaco-vscode-views-service-override"
 import getQuickAccessServiceOverride from '@codingame/monaco-vscode-quickaccess-service-override'
-import { BrowserStorageService } from '@codingame/monaco-vscode-storage-service-override'
+// import { BrowserStorageService } from '@codingame/monaco-vscode-storage-service-override'
 import { ExtensionHostKind } from '@codingame/monaco-vscode-extensions-service-override'
 import { registerExtension } from '@codingame/monaco-vscode-api/extensions'
 
@@ -16,7 +16,7 @@ import {
   constructOptions,
   envOptions,
   remoteAuthority,
-  userDataProvider,
+  // userDataProvider,
   disableShadowDom
 } from './setup.common'
 
@@ -83,11 +83,12 @@ await initLspClient({
 
 //const layoutService = await getService(IWorkbenchLayoutService)
 
-
+/*
 export async function clearStorage(): Promise<void> {
   await userDataProvider.reset()
   await ((await getService(IStorageService)) as BrowserStorageService).clear()
 }
+*/
 
 await registerExtension(
   {
