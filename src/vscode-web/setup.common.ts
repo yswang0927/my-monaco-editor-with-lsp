@@ -111,7 +111,6 @@ let workspaceFile = monaco.Uri.file('/workspace.code-workspace')
 if (useHtmlFileSystemProvider) {
   workspaceFile = monaco.Uri.from({ scheme: 'tmp', path: '/test.code-workspace' })
   await initFile(workspaceFile, JSON.stringify({ folders: [] }, null, 2))
-
   registerHTMLFileSystemProvider()
 
 } else {
@@ -144,48 +143,6 @@ while (variable < 5000) {
 
 
   fileSystemProvider.registerFile(
-    new RegisteredMemoryFile(
-      vscode.Uri.file('/workspace/index.html'),
-      `
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>monaco-vscode-api demo</title>
-    <link rel="stylesheet" href="test.css">
-  </head>
-  <body>
-    <style type="text/css">
-      h1 {
-        color: DeepSkyBlue;
-      }
-    </style>
-
-    <h1>Hello, world!</h1>
-  </body>
-</html>`
-    )
-  );
-
-
-  fileSystemProvider.registerFile(
-    new RegisteredMemoryFile(
-      vscode.Uri.file('/workspace/test.customeditor'),
-      'Custom Editor!'
-    )
-  );
-
-  fileSystemProvider.registerFile(
-    new RegisteredMemoryFile(
-      vscode.Uri.file('/workspace/css/test.css'),
-`
-h1 {
-  color: DeepSkyBlue;
-}`
-    )
-  );
-
-    fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
       vscode.Uri.file('/workspace/Hello.java'),
 `class Hello {
@@ -300,13 +257,13 @@ export const constructOptions: IWorkbenchConstructionOptions = {
           }
   },
   developmentOptions: {
-    logLevel: LogLevel.Info // Default value
+    logLevel: LogLevel.Info
   },
   configurationDefaults: {
     'window.title': 'MyCoder${separator}${dirty}${activeEditorShort}'
   },
   defaultLayout: {
-    editors: useHtmlFileSystemProvider
+    /*editors: useHtmlFileSystemProvider
       ? undefined
       : [
           {
@@ -317,20 +274,20 @@ export const constructOptions: IWorkbenchConstructionOptions = {
             uri: monaco.Uri.file('/workspace/test.md'),
             viewColumn: 2
           }
-        ],
-    layout: useHtmlFileSystemProvider
+        ],*/
+    /*layout: useHtmlFileSystemProvider
       ? undefined
       : {
           editors: {
             orientation: 0,
             groups: [{ size: 1 }, { size: 1 }]
           }
-        },
-    views: [
+        },*/
+    /*views: [
       {
         id: 'custom-view'
       }
-    ],
+    ],*/
     force: resetLayout
   },
   welcomeBanner: {

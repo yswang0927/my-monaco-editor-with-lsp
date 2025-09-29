@@ -193,38 +193,5 @@ perDf2.to(postgres, "t_user_bak")
 
   });
 
-  // 文档内容变化时触发
-  api.workspace.onDidChangeTextDocument((e) => {
-    // console.log('Document changed:', e.document.uri.toString());
-  });
-
-  // 文档保存时触发
-  api.workspace.onDidSaveTextDocument((e) => {
-    // console.log('Document saved:', e.document.uri.toString());
-    console.log('>> 文件保存:');
-    console.log(' - 文件名: ', `${e.fileName}(${e.uri.toString()})`);
-    console.log(' - 文件内容:\n', e.getText());
-  });
-
-  api.workspace.onDidCreateFiles((e) => {
-    console.log('>> 文件创建:');
-    e.files.forEach((file) => {
-      console.log(' - ', `${file.fsPath}(${file.toString()})`);
-    });
-  });
-
-  api.workspace.onDidDeleteFiles((e) => {
-    console.log('>> 文件删除:');
-    e.files.forEach((file) => {
-      console.log(' - ', `${file.fsPath}(${file.toString()})`);
-    });
-  });
-
-  api.workspace.onDidRenameFiles((e) => {
-    console.log('>> 文件重命名:');
-    e.files.forEach((file) => {
-      console.log(' - ', `从 ${file.oldUri.fsPath}(${file.oldUri.toString()}) 重命名为 ${file.newUri.fsPath}(${file.newUri.toString()})`);
-    });
-  });
 
 });

@@ -7,7 +7,7 @@ import { useHtmlFileSystemProvider } from './setup.common'
 import '@codingame/monaco-vscode-css-default-extension'
 import '@codingame/monaco-vscode-html-default-extension'
 import '@codingame/monaco-vscode-javascript-default-extension'
-// import '@codingame/monaco-vscode-typescript-basics-default-extension'
+import '@codingame/monaco-vscode-typescript-basics-default-extension'
 import '@codingame/monaco-vscode-json-default-extension'
 import '@codingame/monaco-vscode-diff-default-extension'
 import '@codingame/monaco-vscode-java-default-extension'
@@ -35,6 +35,8 @@ import './features/scm'
 import './features/customView.workbench'
 // import './features/testing'
 
+// 自定义文件系统Demo
+import './fs-provider/extension'
 import './extensions/tsml'
 
 const { getApi } = registerExtension(
