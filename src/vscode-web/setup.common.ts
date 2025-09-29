@@ -105,7 +105,7 @@ params.delete('resetLayout')
 
 window.history.replaceState({}, document.title, url.href)
 
-export let workspaceFile = monaco.Uri.file('/workspace.code-workspace')
+export let workspaceFile = monaco.Uri.file('/home/xk/myvscode-workspace.code-workspace')
 
 export const userDataProvider = await createIndexedDBProviders()
 
@@ -120,7 +120,7 @@ if (useHtmlFileSystemProvider) {
 
   fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
-      vscode.Uri.file('/workspace/test.js'),
+      vscode.Uri.file('/home/xk/myvscode-workspace/test.js'),
 `// import anotherfile
 let variable = 1
 function inc () {
@@ -132,12 +132,12 @@ while (variable < 5000) {
   console.log('Hello world', variable);
 }`
     )
-  )
+  );
 
   const content = new TextEncoder().encode('This is a readonly static file')
   fileSystemProvider.registerFile(
     new RegisteredReadOnlyFile(
-      vscode.Uri.file('/workspace/test_readonly.js'),
+      vscode.Uri.file('/home/xk/myvscode-workspace/test_readonly.js'),
       async () => content,
       content.length
     )
@@ -146,7 +146,7 @@ while (variable < 5000) {
 
   fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
-      vscode.Uri.file('/workspace/index.html'),
+      vscode.Uri.file('/home/xk/myvscode-workspace/index.html'),
       `
 <!DOCTYPE html>
 <html lang="en">
@@ -166,25 +166,36 @@ while (variable < 5000) {
   </body>
 </html>`
     )
-  )
+  );
 
 
   fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
-      vscode.Uri.file('/workspace/test.customeditor'),
+      vscode.Uri.file('/home/xk/myvscode-workspace/test.customeditor'),
       'Custom Editor!'
     )
-  )
+  );
 
   fileSystemProvider.registerFile(
     new RegisteredMemoryFile(
-      vscode.Uri.file('/workspace/css/test.css'),
+      vscode.Uri.file('/home/xk/myvscode-workspace/css/test.css'),
 `
 h1 {
   color: DeepSkyBlue;
 }`
     )
-  )
+  );
+
+    fileSystemProvider.registerFile(
+    new RegisteredMemoryFile(
+      vscode.Uri.file('/home/xk/myvscode-workspace/Hello.java'),
+`class Hello {
+  public static void main(String[] args) {
+    System.out.println("Hello, world!");
+  }
+}`
+    )
+  );
 
   // Use a workspace file to be able to add another folder later (for the "Attach filesystem" button)
   fileSystemProvider.registerFile(
@@ -194,7 +205,7 @@ h1 {
         {
           folders: [
             {
-              path: '/workspace'
+              path: '/home/xk/myvscode-workspace'
             }
           ]
         },
@@ -203,7 +214,6 @@ h1 {
       )
     )
   )
-
 
   registerFileSystemOverlay(1, fileSystemProvider)
 }

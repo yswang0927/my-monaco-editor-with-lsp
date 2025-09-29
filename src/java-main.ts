@@ -22,7 +22,8 @@ export type LspConfig = {
 };
 
 const main = async (lsConfig: LspConfig, helloCode: string) => {
-    const helloUri = vscode.Uri.file(`${lsConfig.basePath}/src/hello.${lsConfig.languageId}`);
+    const helloUri = vscode.Uri.file(`${lsConfig.basePath}/src2/hello.${lsConfig.languageId}`);
+
     const fileSystemProvider = new RegisteredFileSystemProvider(false);
     fileSystemProvider.registerFile(new RegisteredMemoryFile(helloUri, helloCode));
     registerFileSystemOverlay(1, fileSystemProvider);
@@ -83,7 +84,7 @@ const main = async (lsConfig: LspConfig, helloCode: string) => {
     const editorAppConfig: EditorAppConfig = {
         codeResources: {
             modified: {
-                text: helloCode,
+                text: '',
                 uri: helloUri.path
             }
         }

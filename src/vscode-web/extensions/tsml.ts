@@ -74,7 +74,7 @@ const { getApi } = registerExtension(
     }
   },
   ExtensionHostKind.LocalProcess
-)
+);
 
 void getApi().then(async (api) => {
 

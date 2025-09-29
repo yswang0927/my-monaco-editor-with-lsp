@@ -26,14 +26,14 @@ import '@codingame/monaco-vscode-media-preview-default-extension'
 import '@codingame/monaco-vscode-simple-browser-default-extension'
 
 import './features/output'
-import './features/debugger'
-import './features/intellisense'
+// import './features/debugger'
+// import './features/intellisense'
 import './features/notifications'
 import './features/terminal'
 import './features/scm'
-import './features/ai'
+// import './features/ai'
 import './features/customView.workbench'
-//import './features/testing'
+// import './features/testing'
 
 import './extensions/tsml'
 
