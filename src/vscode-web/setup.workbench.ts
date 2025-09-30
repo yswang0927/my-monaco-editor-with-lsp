@@ -20,7 +20,7 @@ import {
   disableShadowDom
 } from './setup.common'
 
-import { initLspClient } from './features/lsp'
+// import { initSingleLspClient, initMultiLspClients } from './features/lsp'
 
 let container = (window as any).vscodeContainer;
 
@@ -67,14 +67,31 @@ await initializeMonacoService(
   envOptions
 );
 
-// Use `monaco-languageclient` to connect to the java lsp-server
-/*
-await initLspClient({
+// Use `monaco-languageclient` to connect to the language lsp-server
+
+/* Demo: 单语言LSP客户端配置
+await initSingleLspClient({
   websocketUrl: 'ws://127.0.0.1:30003/java',
   languageId: 'java',
   basePath: '/home/xk/myvscode-workspace' // 必须是一个存在的物理绝对路径,否则LSP不生效
 });
 */
+
+/* 支持多语言LSP客户端配置
+await initMultiLspClients([
+  {
+    languageId: 'java',
+    websocketUrl: 'ws://127.0.0.1:30003/java',
+    basePath: '/home/xk/myvscode-workspace' // 必须是一个存在的物理绝对路径,否则LSP不生效
+  },
+  {
+    languageId: 'groovy',
+    websocketUrl: 'ws://127.0.0.1:30002/groovy',
+    basePath: '/home/xk/myvscode-workspace' // 必须是一个存在的物理绝对路径,否则LSP不生效
+  }
+]);
+*/
+
 
 // 可以通过 attachPart() 自定义挂载视图部分
 // attachPart(Parts.EDITOR_PART, this.editorRef);
