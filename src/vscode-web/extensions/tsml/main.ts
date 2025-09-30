@@ -4,24 +4,25 @@
 import * as vscode from 'vscode'
 import { ExtensionHostKind, registerExtension } from '@codingame/monaco-vscode-api/extensions'
 
-const { getApi } = registerExtension(
+const { getApi, registerFileUrl } = registerExtension(
   {
     name: 'tsml-extension',
     publisher: 'mycoder',
     version: '1.0.0',
     engines: {
-      vscode: '*'
+      vscode: '^1.100.0'
     },
+    l10n: './l10n',
     contributes: {
       commands: [
         {
           command: 'tsml.run',
-          title: '运行TSML脚本',
+          title: '%tsml.run.title%',
           icon: '$(play)'
         },
         {
           command: 'tsml.newFile',
-          title: '新建TSML脚本',
+          title: '%tsml.newFile.title%',
           icon: '$(new-file)'
         }
       ],
@@ -76,6 +77,11 @@ const { getApi } = registerExtension(
   ExtensionHostKind.LocalProcess
 );
 
+// 配置语言国际化
+registerFileUrl('package.nls.json', new URL('./package.nls.json', import.meta.url).href);
+registerFileUrl('package.nls.zh-cn.json', new URL('./package.nls.zh-cn.json', import.meta.url).href);
+registerFileUrl('./l10n/bundle.l10n.zh-cn.json', new URL('./l10n/bundle.l10n.zh-cn.json', import.meta.url).href);
+
 void getApi().then(async (api) => {
 
   const checkIsRunFromExplorer = (fileUri: vscode.Uri) => {
@@ -98,12 +104,13 @@ void getApi().then(async (api) => {
     let document: vscode.TextDocument;
     if (checkIsRunFromExplorer(fileUri)) {
       document = await api.workspace.openTextDocument(fileUri);
+      api.window.showTextDocument(document);
     } else {
       const editor = api.window.activeTextEditor;
       if (editor) {
         document = editor.document;
       } else {
-        api.window.showInformationMessage('暂无可执行的TSML脚本');
+        api.window.showInformationMessage(api.l10n.t('No executable TSML script available'));
         return;
       }
     }
@@ -122,6 +129,7 @@ void getApi().then(async (api) => {
       codeToRun = document.getText();
     }
 
+    // TODO 执行代码
     void api.window.showInformationMessage('运行TSML', {
       detail: codeToRun,
       modal: true
@@ -156,19 +164,19 @@ perDf2.to(postgres, "t_user_bak")
 
   api.commands.registerCommand('tsml.newFile', (dirUri: vscode.Uri) => {
     if (!dirUri) {
-      void api.window.showErrorMessage('无法获取当前目录，无法新建TSML脚本');
+      void api.window.showErrorMessage(api.l10n.t('Unable to get current directory, cannot create new TSML script'));
       return;
     }
     
     api.window.showInputBox({
-      placeHolder: '输入 TSML 文件名',
+      placeHolder: api.l10n.t('Input tsml file name'),
       ignoreFocusOut: true,
       validateInput: (value) => {
         if (!value || value.trim().length === 0) {
-          return '文件名不能为空';
+          return api.l10n.t('File name cannot be empty');
         }
         if (value.includes('/') || value.includes('\\')) {
-          return '文件名不能包含路径分隔符';
+          return api.l10n.t('File name cannot contain path separators');
         }
         return null;
       }
@@ -179,8 +187,12 @@ perDf2.to(postgres, "t_user_bak")
         // 检查文件是否存在
         try {
           await api.workspace.fs.stat(filePath);
-          api.window.showWarningMessage(`文件 ${fileName} 已存在，是否覆盖？`, '覆盖', '取消').then((answer) => {
-            if (answer === '覆盖') {
+          api.window.showWarningMessage(
+            api.l10n.t('File {0} already exists, do you want to overwrite it?', fileName), 
+            api.l10n.t('Override'), 
+            api.l10n.t('Cancel')
+          ).then((answer) => {
+            if (answer === api.l10n.t('Override')) {
               // 覆盖文件
               createNewTsmlFile(filePath);
             }

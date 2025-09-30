@@ -1,0 +1,10 @@
+{
+    "Input tsml file name": "输入TSML文件名",
+    "File name cannot be empty": "文件名不能为空",
+    "File name cannot contain path separators": "文件名不能包含路径分隔符",
+    "File {0} already exists, do you want to overwrite it?": "文件 {0} 已存在，是否覆盖？",
+    "Unable to get current directory, cannot create new TSML script": "无法获取当前目录，无法新建TSML脚本",
+    "No executable TSML script available": "暂无可执行的TSML脚本",
+    "Override": "覆盖",
+    "Cancel": "取消"
+}

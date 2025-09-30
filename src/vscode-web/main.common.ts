@@ -36,7 +36,7 @@ import './features/customView.workbench'
 
 // 自定义文件系统Demo
 import './fs-provider/extension'
-import './extensions/tsml'
+import './extensions/tsml/main'
 
 const { getApi } = registerExtension(
   {

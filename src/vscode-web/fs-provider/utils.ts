@@ -100,6 +100,10 @@ export const getFsBasePathFromRepoUrl = (repoUrl: string): string => {
 
 export const getRepoUrlFromFsBasePath = (fsBasePath: string) => {
   let [kind, pathName] = fsBasePath.split('@');
+  // TODO !pathName
+  if (!pathName) {
+    return '';
+  }
 
   const [owner, repo, ref] = pathName.split(':');
   const refQuery = ref ? `?ref=${ref}` : '';

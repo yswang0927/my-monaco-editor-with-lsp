@@ -20,7 +20,7 @@ import {
   disableShadowDom
 } from './setup.common'
 
-// import { initLspClient } from './features/lsp'
+import { initLspClient } from './features/lsp'
 
 let container = (window as any).vscodeContainer;
 
